@@ -14,6 +14,7 @@ import Root from "./Root";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import AddCard from "./Pages/ProductDetail/AddCard";
 import { CartProvider } from "./Components/CartContext ";
+import Contact from "./Pages/Contact/Contact";
 
 
 const url =
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "addcard",
         element: <AddCard />,
+      },
+      {
+       path: "/contact",
+       element: <Contact></Contact>
       },
     ],
   },
