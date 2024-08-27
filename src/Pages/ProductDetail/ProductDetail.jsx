@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../../Components/CartContext ';
 
-
 const ProductDetail = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const { addToCart } = useCart();
     const [product, setProduct] = useState(null);
-    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -31,8 +29,12 @@ const ProductDetail = () => {
     }
 
     const handleAddToCart = () => {
-        const result = addToCart(product); 
-        setMessage(result.message); // Set the message based on addToCart response
+        const result = addToCart(product);
+        if (result.success) {
+            // Success alert already handled in CartContext.js
+        } else {
+            // Already added alert already handled in CartContext.js
+        }
     };
 
     return (
@@ -41,7 +43,6 @@ const ProductDetail = () => {
             <img src={product.image} alt={product.name} className="w-60 h-60 object-cover" />
             <p>Price: ${product.price}</p>
             <button onClick={handleAddToCart} className="btn btn-primary">Add to Cart</button>
-            {message && <p>{message}</p>} {/* Display message */}
         </div>
     );
 };

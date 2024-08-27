@@ -4,7 +4,6 @@ import { useCart } from '../../Components/CartContext ';
 const AddCard = () => {
     const { cart, removeFromCart } = useCart(); 
     const [products, setProducts] = useState([]);
-    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -20,11 +19,6 @@ const AddCard = () => {
         fetchProducts();
     }, []);
 
-    const handleRemoveFromCart = (productId) => {
-        const resultMessage = removeFromCart(productId);
-        setMessage(resultMessage); // Set the delete success message
-    };
-
     const cartProducts = cart.map(item => {
         const product = products.find(product => product.id === item.id);
         return product ? { ...product, quantity: item.quantity } : null;
@@ -34,7 +28,7 @@ const AddCard = () => {
         <div>
             <h2>Cart</h2>
             {cartProducts.length === 0 ? (
-                <p>No products in the cart!</p>
+                <p>No products in the cart.</p>
             ) : (
                 <div>
                     <h3>Product Items:</h3>
@@ -49,7 +43,7 @@ const AddCard = () => {
                                     <p>{product.name}</p>
                                     <div className="card-actions justify-end">
                                         <button 
-                                            onClick={() => handleRemoveFromCart(product.id)} 
+                                            onClick={() => removeFromCart(product.id)} 
                                             className="btn btn-sm btn-danger"
                                         >
                                             Delete
@@ -61,7 +55,6 @@ const AddCard = () => {
                     </div>
                 </div>
             )}
-            {message && <p>{message}</p>} {/* Display delete success message */}
         </div>
     );
 };
